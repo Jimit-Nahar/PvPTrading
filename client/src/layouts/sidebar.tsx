@@ -57,31 +57,32 @@ export default function Sidebar() {
           
           <nav className="space-y-1">
             {menuItems.map((item) => (
-              <Link 
-                key={item.path} 
-                href={item.path}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <a 
-                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
-                    (location === item.path || location.startsWith(item.path + '?')) 
-                      ? 'bg-primary bg-opacity-10 text-primary' 
-                      : 'text-muted-foreground hover:bg-secondary'
-                  }`}
+              <div key={item.path}>
+                <Link 
+                  href={item.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </a>
-              </Link>
+                  <div 
+                    className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
+                      (location === item.path || location.startsWith(item.path + '?')) 
+                        ? 'bg-primary bg-opacity-10 text-primary' 
+                        : 'text-muted-foreground hover:bg-secondary'
+                    } cursor-pointer`}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </div>
+                </Link>
+              </div>
             ))}
           </nav>
         </div>
         
         <div className="p-4 border-t border-border mt-4">
-          <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-muted-foreground hover:bg-secondary">
+          <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-muted-foreground hover:bg-secondary cursor-pointer">
             <HelpCircle className="h-4 w-4" />
             <span>Help & Support</span>
-          </a>
+          </div>
           <button 
             onClick={handleLogout} 
             className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-muted-foreground hover:bg-secondary"

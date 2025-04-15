@@ -9,6 +9,9 @@ import Dashboard from "@/pages/dashboard";
 import ChallengeDetails from "@/pages/challenge-details";
 import TradeInterface from "@/pages/trade-interface";
 import ProfilePage from "@/pages/profile-page";
+import ChallengesPage from "@/pages/challenges-page";
+import TradesPage from "@/pages/trades-page";
+import LeaderboardPage from "@/pages/leaderboard-page";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
 
@@ -18,7 +21,10 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/auth" component={AuthPage} />
       <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute path="/challenges" component={ChallengesPage} />
       <ProtectedRoute path="/challenges/:id" component={ChallengeDetails} />
+      <ProtectedRoute path="/trades" component={TradesPage} />
+      <ProtectedRoute path="/leaderboard" component={LeaderboardPage} />
       <ProtectedRoute path="/trade/:id" component={TradeInterface} />
       <ProtectedRoute path="/profile" component={ProfilePage} />
       <Route component={NotFound} />
