@@ -251,7 +251,7 @@ export default function ChallengesPage() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{challenge.participantsCount || 0} / {challenge.maxParticipants}</p>
+                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Duration</p>
@@ -306,7 +306,7 @@ export default function ChallengesPage() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{challenge.participantsCount || 0} / {challenge.maxParticipants}</p>
+                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Duration</p>
@@ -361,7 +361,7 @@ export default function ChallengesPage() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{challenge.participantsCount || 0} / {challenge.maxParticipants}</p>
+                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Ends In</p>
@@ -416,7 +416,7 @@ export default function ChallengesPage() {
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{challenge.participantsCount || 0} / {challenge.maxParticipants}</p>
+                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Winner</p>
