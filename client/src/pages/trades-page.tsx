@@ -69,6 +69,17 @@ export default function TradesPage() {
   } = useQuery<any[]>({
     queryKey: ["/api/trades"],
   });
+  
+  // Handle error notifications
+  useEffect(() => {
+    if (participationsError || tradesError) {
+      toast({
+        title: "Error",
+        description: "Failed to load trades data. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }, [participationsError, tradesError, toast]);
 
   if (isLoadingParticipations || isLoadingTrades) {
     return (
@@ -79,16 +90,6 @@ export default function TradesPage() {
       </MainLayout>
     );
   }
-
-  useEffect(() => {
-    if (participationsError || tradesError) {
-      toast({
-        title: "Error",
-        description: "Failed to load trades data. Please try again.",
-        variant: "destructive",
-      });
-    }
-  }, [participationsError, tradesError, toast]);
 
   // Mock data for demonstration
   const trades = [

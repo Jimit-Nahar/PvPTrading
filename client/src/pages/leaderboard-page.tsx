@@ -64,6 +64,17 @@ export default function LeaderboardPage() {
   } = useQuery<LeaderboardItem[]>({
     queryKey: ["/api/leaderboard/global"],
   });
+  
+  // Handle error notifications if needed
+  useEffect(() => {
+    if (globalError) {
+      toast({
+        title: "Error",
+        description: "Failed to load leaderboard data. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }, [globalError, toast]);
 
   // Mock data for global leaderboard
   const mockGlobalLeaderboard: LeaderboardItem[] = [
