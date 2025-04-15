@@ -224,13 +224,15 @@ export default function LeaderboardPage() {
     );
   }
 
-  if (globalError) {
-    toast({
-      title: "Error",
-      description: "Failed to load leaderboard data. Please try again.",
-      variant: "destructive",
-    });
-  }
+  useEffect(() => {
+    if (globalError) {
+      toast({
+        title: "Error",
+        description: "Failed to load leaderboard data. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }, [globalError, toast]);
 
   // Filter and sort leaderboard data
   const filterAndSortLeaderboard = (leaderboard: LeaderboardItem[]) => {
