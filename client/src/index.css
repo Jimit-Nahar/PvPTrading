@@ -8,6 +8,41 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-black text-white;
+  }
+  
+  /* Add more custom styles for black/white/green theme */
+  .bg-card {
+    @apply bg-zinc-950;
+  }
+  
+  .text-success {
+    @apply text-emerald-500;
+  }
+  
+  .border-success {
+    @apply border-emerald-500;
+  }
+  
+  /* Make buttons more stylish */
+  .btn-primary {
+    @apply bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-900;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-700 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-emerald-600;
   }
 }
