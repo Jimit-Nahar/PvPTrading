@@ -45,6 +45,22 @@ import {
 } from "@/components/ui/select";
 import PerformanceChart from "@/components/performance-chart";
 
+// Helper functions for safe parsing
+const safeParseFloat = (value: string | undefined): number => {
+  if (!value) return 0;
+  const parsed = parseFloat(value);
+  return isNaN(parsed) ? 0 : parsed;
+};
+
+const safeParseDate = (dateStr: string | undefined): Date => {
+  if (!dateStr) return new Date();
+  try {
+    return new Date(dateStr);
+  } catch (e) {
+    return new Date();
+  }
+};
+
 export default function TradesPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -234,28 +250,30 @@ export default function TradesPage() {
   const calculateMetrics = () => {
     const closedTradesArray = trades.filter(t => t.status === "closed");
     
+    // Use the global safeParseFloat helper function
+    
     // Calculate total profit
-    const totalProfit = closedTradesArray.reduce((sum, trade) => sum + parseFloat(trade.profit), 0);
+    const totalProfit = closedTradesArray.reduce((sum, trade) => sum + safeParseFloat(trade.profit), 0);
     
     // Calculate win rate
-    const winningTrades = closedTradesArray.filter(t => parseFloat(t.profit) > 0);
+    const winningTrades = closedTradesArray.filter(t => safeParseFloat(t.profit) > 0);
     const winRate = closedTradesArray.length > 0 
       ? (winningTrades.length / closedTradesArray.length) * 100 
       : 0;
     
     // Calculate average profit and loss
     const avgProfit = winningTrades.length > 0 
-      ? winningTrades.reduce((sum, trade) => sum + parseFloat(trade.profit), 0) / winningTrades.length 
+      ? winningTrades.reduce((sum, trade) => sum + safeParseFloat(trade.profit), 0) / winningTrades.length 
       : 0;
     
-    const losingTrades = closedTradesArray.filter(t => parseFloat(t.profit) < 0);
+    const losingTrades = closedTradesArray.filter(t => safeParseFloat(t.profit) < 0);
     const avgLoss = losingTrades.length > 0 
-      ? losingTrades.reduce((sum, trade) => sum + parseFloat(trade.profit), 0) / losingTrades.length 
+      ? losingTrades.reduce((sum, trade) => sum + safeParseFloat(trade.profit), 0) / losingTrades.length 
       : 0;
     
     // Calculate profit factor
-    const grossProfit = winningTrades.reduce((sum, trade) => sum + parseFloat(trade.profit), 0);
-    const grossLoss = Math.abs(losingTrades.reduce((sum, trade) => sum + parseFloat(trade.profit), 0));
+    const grossProfit = winningTrades.reduce((sum, trade) => sum + safeParseFloat(trade.profit), 0);
+    const grossLoss = Math.abs(losingTrades.reduce((sum, trade) => sum + safeParseFloat(trade.profit), 0));
     const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
     
     return {
@@ -274,16 +292,18 @@ export default function TradesPage() {
   
   // Generate chart data
   const generateChartData = () => {
+    // Using the global safeParseDate helper
+    
     const closedTradesArray = [...trades.filter(t => t.status === "closed")]
-      .sort((a, b) => new Date(a.closeTime).getTime() - new Date(b.closeTime).getTime());
+      .sort((a, b) => safeParseDate(a.closeTime).getTime() - safeParseDate(b.closeTime).getTime());
     
     let cumulativeProfit = 0;
     return closedTradesArray.map((trade, index) => {
-      cumulativeProfit += parseFloat(trade.profit);
+      cumulativeProfit += safeParseFloat(trade.profit);
       return {
-        name: new Date(trade.closeTime).toLocaleDateString(),
+        name: safeParseDate(trade.closeTime).toLocaleDateString(),
         value: cumulativeProfit,
-        pnl: parseFloat(trade.profit),
+        pnl: safeParseFloat(trade.profit),
       };
     });
   };
@@ -512,8 +532,8 @@ export default function TradesPage() {
                             <TableCell>{trade.openPrice}</TableCell>
                             <TableCell>{trade.closePrice || "-"}</TableCell>
                             <TableCell>{trade.volume}</TableCell>
-                            <TableCell className={trade.profit && parseFloat(trade.profit) >= 0 ? "text-green-500 font-semibold" : trade.profit ? "text-red-500 font-semibold" : ""}>
-                              {trade.profit ? `${parseFloat(trade.profit) >= 0 ? "+" : ""}${formatCurrency(parseFloat(trade.profit))}` : "-"}
+                            <TableCell className={trade.profit && safeParseFloat(trade.profit) >= 0 ? "text-green-500 font-semibold" : trade.profit ? "text-red-500 font-semibold" : ""}>
+                              {trade.profit ? `${safeParseFloat(trade.profit) >= 0 ? "+" : ""}${formatCurrency(safeParseFloat(trade.profit))}` : "-"}
                             </TableCell>
                             <TableCell>
                               <Badge variant="outline" className={`${trade.status === "open" ? "bg-blue-500/10 text-blue-500 border-blue-500/20" : "bg-secondary text-muted-foreground"}`}>
@@ -521,7 +541,7 @@ export default function TradesPage() {
                               </Badge>
                             </TableCell>
                             <TableCell className="text-muted-foreground">
-                              {getRelativeTime(new Date(trade.openTime))}
+                              {getRelativeTime(safeParseDate(trade.openTime))}
                             </TableCell>
                             <TableCell>{trade.challenge}</TableCell>
                           </TableRow>
