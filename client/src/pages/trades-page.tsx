@@ -590,13 +590,13 @@ export default function TradesPage() {
                               </Badge>
                             </TableCell>
                             <TableCell>{trade.openPrice}</TableCell>
-                            <TableCell>{parseFloat(trade.openPrice) + (Math.random() * 0.005 * (Math.random() > 0.5 ? 1 : -1)).toFixed(4)}</TableCell>
+                            <TableCell>{safeParseFloat(trade.openPrice) + (Math.random() * 0.005 * (Math.random() > 0.5 ? 1 : -1)).toFixed(4)}</TableCell>
                             <TableCell>{trade.volume}</TableCell>
                             <TableCell className={Math.random() > 0.5 ? "text-green-500 font-semibold" : "text-red-500 font-semibold"}>
                               {Math.random() > 0.5 ? "+" : "-"}{formatCurrency(Math.random() * 50)}
                             </TableCell>
                             <TableCell className="text-muted-foreground">
-                              {getRelativeTime(new Date(trade.openTime))}
+                              {getRelativeTime(safeParseDate(trade.openTime))}
                             </TableCell>
                             <TableCell>{trade.challenge}</TableCell>
                             <TableCell>
@@ -650,13 +650,13 @@ export default function TradesPage() {
                             <TableCell>{trade.openPrice}</TableCell>
                             <TableCell>{trade.closePrice}</TableCell>
                             <TableCell>{trade.volume}</TableCell>
-                            <TableCell className={parseFloat(trade.profit) >= 0 ? "text-green-500 font-semibold" : "text-red-500 font-semibold"}>
-                              {parseFloat(trade.profit) >= 0 ? "+" : ""}{formatCurrency(parseFloat(trade.profit))}
+                            <TableCell className={safeParseFloat(trade.profit) >= 0 ? "text-green-500 font-semibold" : "text-red-500 font-semibold"}>
+                              {safeParseFloat(trade.profit) >= 0 ? "+" : ""}{formatCurrency(safeParseFloat(trade.profit))}
                             </TableCell>
                             <TableCell>
                               {(() => {
-                                const openTime = new Date(trade.openTime).getTime();
-                                const closeTime = new Date(trade.closeTime).getTime();
+                                const openTime = safeParseDate(trade.openTime).getTime();
+                                const closeTime = safeParseDate(trade.closeTime).getTime();
                                 const durationMs = closeTime - openTime;
                                 const hours = Math.floor(durationMs / (1000 * 60 * 60));
                                 const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
@@ -664,7 +664,7 @@ export default function TradesPage() {
                               })()}
                             </TableCell>
                             <TableCell className="text-muted-foreground">
-                              {getRelativeTime(new Date(trade.closeTime))}
+                              {getRelativeTime(safeParseDate(trade.closeTime))}
                             </TableCell>
                             <TableCell>{trade.challenge}</TableCell>
                           </TableRow>
