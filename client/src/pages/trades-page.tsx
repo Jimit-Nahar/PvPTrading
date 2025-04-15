@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import MainLayout from "@/layouts/main-layout";
 import { useAuth } from "@/hooks/use-auth";
@@ -80,13 +80,15 @@ export default function TradesPage() {
     );
   }
 
-  if (participationsError || tradesError) {
-    toast({
-      title: "Error",
-      description: "Failed to load trades data. Please try again.",
-      variant: "destructive",
-    });
-  }
+  useEffect(() => {
+    if (participationsError || tradesError) {
+      toast({
+        title: "Error",
+        description: "Failed to load trades data. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }, [participationsError, tradesError, toast]);
 
   // Mock data for demonstration
   const trades = [
