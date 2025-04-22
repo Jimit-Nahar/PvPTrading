@@ -15,7 +15,7 @@ import ActiveChallengeCard from "@/components/active-challenge-card";
 import PerformanceChart from "@/components/performance-chart";
 import StrategyRandomizer from "@/components/strategy-randomizer";
 import MilestoneDashboard from "@/components/milestone-dashboard";
-import { TrendingUp, Target, Award, Zap, Trophy } from "lucide-react";
+import { TrendingUp, Target, Award, Zap, Trophy, CreditCard, Wallet, Bitcoin } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
