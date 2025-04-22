@@ -431,13 +431,26 @@ export default function ChallengesPage() {
                         </div>
                       </div>
 
-                      <Button
-                        className="w-full flex items-center justify-center"
-                        onClick={() => handleViewChallenge(challenge.id)}
-                      >
-                        Join Challenge
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      <div className="space-y-3">
+                        <a href={challenge.paymentLinks.creditCard} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-gradient-to-r from-[#635BFF] to-[#504ACC]">
+                            <CreditCard className="w-4 h-4 mr-2" />
+                            Pay with Credit Card
+                          </Button>
+                        </a>
+                        <a href={challenge.paymentLinks.paypal} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-gradient-to-r from-[#0070BA] to-[#005EA6]">
+                            <Wallet className="w-4 h-4 mr-2" />
+                            Pay with PayPal
+                          </Button>
+                        </a>
+                        <a href={challenge.paymentLinks.crypto} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-gradient-to-r from-[#0052FF] to-[#0040CC]">
+                            <Bitcoin className="w-4 h-4 mr-2" />
+                            Pay with Crypto
+                          </Button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ))

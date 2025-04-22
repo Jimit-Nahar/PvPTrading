@@ -6,15 +6,20 @@ import { formatCurrency } from "@/lib/utils";
 import { Countdown } from "./ui/countdown";
 import { useState } from "react";
 import JoinChallengeModal from "./join-challenge-modal";
+import { useRouter } from 'next/router';
+import { toast } from "@/components/ui/use-toast";
+
 
 interface ChallengeCardProps {
   challenge: Challenge;
   participantsCount?: number;
+  onPurchase: (challengeId: string, paymentMethod: string) => void; // Added prop for payment handling
 }
 
-export default function ChallengeCard({ challenge, participantsCount = 0 }: ChallengeCardProps) {
+export default function ChallengeCard({ challenge, participantsCount = 0, onPurchase }: ChallengeCardProps) {
   const [showJoinModal, setShowJoinModal] = useState(false);
-  
+  const router = useRouter();
+
   const getBackgroundImage = () => {
     if (challenge.type === 'forex') {
       return 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3';
@@ -37,6 +42,20 @@ export default function ChallengeCard({ challenge, participantsCount = 0 }: Chal
     return 'from-blue-900 to-indigo-900';
   };
 
+  const handlePayment = async (paymentMethod: string) => {
+    try {
+      await onPurchase(challenge.id, paymentMethod);
+    } catch (error) {
+      console.error("Error during purchase:", error);
+      toast({
+        title: "Error",
+        description: "Failed to join challenge. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+
   return (
     <>
       <Card className="overflow-hidden shadow-lg">
@@ -54,7 +73,7 @@ export default function ChallengeCard({ challenge, participantsCount = 0 }: Chal
             <h3 className="text-white font-bold text-lg">{challenge.name}</h3>
           </div>
         </div>
-        
+
         <CardContent className="p-4">
           <div className="flex justify-between mb-4">
             <div>
@@ -70,7 +89,7 @@ export default function ChallengeCard({ challenge, participantsCount = 0 }: Chal
               <p className="font-semibold">{formatCurrency(parseFloat(challenge.prizeAmount))} Account</p>
             </div>
           </div>
-          
+
           <div className="mb-4">
             <p className="text-xs text-muted-foreground mb-1">Starts In</p>
             <Countdown 
@@ -79,26 +98,26 @@ export default function ChallengeCard({ challenge, participantsCount = 0 }: Chal
             />
           </div>
         </CardContent>
-        
+
         <CardFooter className="p-4 pt-0">
           <div className="space-y-3 w-full">
             <Button 
               className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90"
-              onClick={() => window.open(`https://buy.stripe.com/payment/${challenge.id}`, '_blank')}
+              onClick={() => handlePayment('stripe')}
             >
-              Pay with Credit Card
+              Pay with Stripe
             </Button>
             <Button 
               className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90"
-              onClick={() => window.open(`https://paypal.com/payment/${challenge.id}`, '_blank')}
+              onClick={() => handlePayment('paypal')}
             >
               Pay with PayPal
             </Button>
             <Button 
               className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90"
-              onClick={() => window.open(`https://commerce.coinbase.com/payment/${challenge.id}`, '_blank')}
+              onClick={() => handlePayment('coinbase')}
             >
-              Pay with Crypto
+              Pay with Coinbase
             </Button>
           </div>
         </CardFooter>

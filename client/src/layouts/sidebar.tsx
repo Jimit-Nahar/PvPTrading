@@ -21,6 +21,7 @@ export default function Sidebar() {
   const menuItems = [
     { path: "/dashboard", label: "Dashboard", icon: <Home className="h-4 w-4" /> },
     { path: "/trades", label: "My Trades", icon: <LineChart className="h-4 w-4" /> },
+    { path: "/challenges", label: "Challenges", icon: <Trophy className="h-4 w-4" /> }, // Added Challenges tab
     { path: "/leaderboard", label: "Leaderboard", icon: <Users className="h-4 w-4" /> },
     { path: "/profile", label: "Profile", icon: <UserCircle className="h-4 w-4" /> },
     { path: "/settings", label: "Settings", icon: <Settings className="h-4 w-4" /> },
@@ -39,7 +40,7 @@ export default function Sidebar() {
           <Menu className="h-5 w-5" />
         </Button>
       </div>
-      
+
       <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} lg:block`}>
         <div className="p-4">
           {user && (
@@ -53,7 +54,7 @@ export default function Sidebar() {
               </div>
             </div>
           )}
-          
+
           <nav className="space-y-1">
             {menuItems.map((item) => (
               <div key={item.path}>
@@ -76,7 +77,7 @@ export default function Sidebar() {
             ))}
           </nav>
         </div>
-        
+
         <div className="p-4 border-t border-border mt-4">
           <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-muted-foreground hover:bg-secondary cursor-pointer">
             <HelpCircle className="h-4 w-4" />

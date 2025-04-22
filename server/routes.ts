@@ -135,6 +135,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get active participations (challenges)
+  app.post("/api/participations", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { challengeId, paymentMethod } = req.body;
+    
+    try {
+      const participation = await storage.createParticipation({
+        userId: req.user.id,
+        challengeId,
+        status: "active",
+        paymentMethod,
+        startDate: new Date(),
+      });
+      
+      res.status(201).json(participation);
+    } catch (error) {
+      res.status(500).json({ message: "Error creating participation" });
+    }
+  });
+
   app.get("/api/participations/active", async (req, res) => {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ message: "Unauthorized" });
