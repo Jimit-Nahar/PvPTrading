@@ -20,7 +20,6 @@ export default function Sidebar() {
 
   const menuItems = [
     { path: "/dashboard", label: "Dashboard", icon: <Home className="h-4 w-4" /> },
-    { path: "/challenges", label: "Challenges", icon: <Trophy className="h-4 w-4" /> },
     { path: "/trades", label: "My Trades", icon: <LineChart className="h-4 w-4" /> },
     { path: "/leaderboard", label: "Leaderboard", icon: <Users className="h-4 w-4" /> },
     { path: "/profile", label: "Profile", icon: <UserCircle className="h-4 w-4" /> },
