@@ -36,56 +36,14 @@ export default function ChallengesPage() {
   const [, navigate] = useLocation();
   const { toast } = useToast();
 
-  const challenges = [
-    {
-      id: "10k",
-      name: "$10K Challenge",
-      type: "forex",
-      description: "Start with a $10,000 trading account",
-      entryFee: "99",
-      prizeAmount: "10000",
-      maxParticipants: 100,
-      status: "active",
-      paymentLinks: {
-        creditCard: "https://buy.stripe.com/eVa9Ca1IFeYLaYgaEN",
-        paypal: "https://www.paypal.com/ncp/payment/9UBJPT32WV9ZU",
-        crypto: "https://commerce.coinbase.com/checkout/2c04ee65-65af-4c08-96a2-9e6fba6517e9"
-      }
-    },
-    {
-      id: "25k",
-      name: "$25K Challenge",
-      type: "forex",
-      description: "Start with a $25,000 trading account",
-      entryFee: "199",
-      prizeAmount: "25000",
-      maxParticipants: 100,
-      status: "active",
-      paymentLinks: {
-        creditCard: "https://buy.stripe.com/6oEdSq0EB7wjgiA7sC",
-        paypal: "https://www.paypal.com/ncp/payment/QF396HX2XEBJL",
-        crypto: "https://commerce.coinbase.com/checkout/28b36ebf-6d2f-4a24-8705-ed7356098ab0"
-      }
-    },
-    {
-      id: "50k",
-      name: "$50K Challenge",
-      type: "forex",
-      description: "Start with a $50,000 trading account",
-      entryFee: "299",
-      prizeAmount: "50000",
-      maxParticipants: 100,
-      status: "active",
-      paymentLinks: {
-        creditCard: "https://buy.stripe.com/4gw5lUbjf03R3vO6oz",
-        paypal: "https://www.paypal.com/ncp/payment/TC4UTAGGFCKH8",
-        crypto: "https://commerce.coinbase.com/checkout/50ce0148-0b93-4253-a526-bd0cdbb64d47"
-      }
-    }
-  ];
-  
-  const isLoading = false;
-  const error = null;
+  // Fetch challenges
+  const {
+    data: challenges,
+    isLoading,
+    error,
+  } = useQuery<Challenge[]>({
+    queryKey: ["/api/challenges"],
+  });
 
   if (isLoading) {
     return (
