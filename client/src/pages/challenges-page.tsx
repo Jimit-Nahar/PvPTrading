@@ -61,9 +61,55 @@ export default function ChallengesPage() {
     });
   }
 
+  const challenges = [
+    {
+      id: "10k",
+      name: "$10K Challenge",
+      type: "forex",
+      status: "upcoming",
+      description: "Start your trading journey with a $10,000 funded account",
+      prizeAmount: "10000",
+      entryFee: "97",
+      maxParticipants: 100,
+      payments: {
+        card: "https://buy.stripe.com/eVa9Ca1IFeYLaYgaEN",
+        paypal: "https://www.paypal.com/ncp/payment/9UBJPT32WV9ZU",
+        crypto: "https://commerce.coinbase.com/checkout/2c04ee65-65af-4c08-96a2-9e6fba6517e9"
+      }
+    },
+    {
+      id: "25k",
+      name: "$25K Challenge",
+      type: "forex",
+      status: "upcoming",
+      description: "Scale up with a $25,000 funded account",
+      prizeAmount: "25000",
+      entryFee: "197",
+      maxParticipants: 100,
+      payments: {
+        card: "https://buy.stripe.com/6oEdSq0EB7wjgiA7sC",
+        paypal: "https://www.paypal.com/ncp/payment/QF396HX2XEBJL",
+        crypto: "https://commerce.coinbase.com/checkout/28b36ebf-6d2f-4a24-8705-ed7356098ab0"
+      }
+    },
+    {
+      id: "50k",
+      name: "$50K Challenge",
+      type: "forex",
+      status: "upcoming",
+      description: "Trade with a professional $50,000 funded account",
+      prizeAmount: "50000",
+      entryFee: "297",
+      maxParticipants: 100,
+      payments: {
+        card: "https://buy.stripe.com/4gw5lUbjf03R3vO6oz",
+        paypal: "https://www.paypal.com/ncp/payment/TC4UTAGGFCKH8",
+        crypto: "https://commerce.coinbase.com/checkout/50ce0148-0b93-4253-a526-bd0cdbb64d47"
+      }
+    }
+  ];
+
   const filterChallenges = (status: string) => {
-    if (!challenges) return [];
-    
     let filtered = [...challenges];
     
     // Filter by status
@@ -229,11 +275,7 @@ export default function ChallengesPage() {
                         <Badge className={getBadgeColor(challenge.type)}>
                           {challenge.type.charAt(0).toUpperCase() + challenge.type.slice(1)}
                         </Badge>
-                        <div className="text-xs text-muted-foreground">
-                          {challenge.status === 'upcoming' ? 'Starts in 2 days' : 
-                           challenge.status === 'active' ? 'Ends in 1 day' : 
-                           'Completed'}
-                        </div>
+                        <Badge variant="outline">Ready to Join</Badge>
                       </div>
                       <h3 className="text-xl font-bold mb-4">{challenge.name}</h3>
                       <p className="text-muted-foreground text-sm mb-6">
@@ -249,23 +291,25 @@ export default function ChallengesPage() {
                           <p className="text-xs text-muted-foreground">Entry Fee</p>
                           <p className="font-semibold">{formatCurrency(parseFloat(challenge.entryFee))}</p>
                         </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-muted-foreground">Duration</p>
-                          <p className="font-semibold">3 Days</p>
-                        </div>
                       </div>
                       
-                      <Button 
-                        className="w-full flex items-center justify-center"
-                        onClick={() => handleViewChallenge(challenge.id)}
-                      >
-                        View Challenge
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      <div className="space-y-3">
+                        <a href={challenge.payments.card} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
+                            Pay with Credit Card
+                          </Button>
+                        </a>
+                        <a href={challenge.payments.paypal} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
+                            Pay with PayPal
+                          </Button>
+                        </a>
+                        <a href={challenge.payments.crypto} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
+                            Pay with Crypto
+                          </Button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ))
