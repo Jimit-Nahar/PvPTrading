@@ -81,12 +81,26 @@ export default function ChallengeCard({ challenge, participantsCount = 0 }: Chal
         </CardContent>
         
         <CardFooter className="p-4 pt-0">
-          <Button
-            className="w-full"
-            onClick={() => setShowJoinModal(true)}
-          >
-            Join Challenge
-          </Button>
+          <div className="space-y-3 w-full">
+            <Button 
+              className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90"
+              onClick={() => window.open(`https://buy.stripe.com/payment/${challenge.id}`, '_blank')}
+            >
+              Pay with Credit Card
+            </Button>
+            <Button 
+              className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90"
+              onClick={() => window.open(`https://paypal.com/payment/${challenge.id}`, '_blank')}
+            >
+              Pay with PayPal
+            </Button>
+            <Button 
+              className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90"
+              onClick={() => window.open(`https://commerce.coinbase.com/payment/${challenge.id}`, '_blank')}
+            >
+              Pay with Crypto
+            </Button>
+          </div>
         </CardFooter>
       </Card>
 
