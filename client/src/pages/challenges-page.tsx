@@ -21,6 +21,8 @@ import {
   Users,
   Clock,
   ArrowRight,
+  Bitcoin,
+  CreditCard,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { Challenge } from "@shared/schema";
@@ -432,19 +434,19 @@ export default function ChallengesPage() {
                       </div>
 
                       <div className="space-y-3">
-                        <a href={challenge.paymentLinks.creditCard} target="_blank" rel="noopener noreferrer">
+                        <a href={`/challenges/${challenge.id}/pay?method=card`} target="_blank" rel="noopener noreferrer">
                           <Button className="w-full bg-gradient-to-r from-[#635BFF] to-[#504ACC]">
-                            <CreditCard className="w-4 h-4 mr-2" />
+                            <Wallet className="w-4 h-4 mr-2" />
                             Pay with Credit Card
                           </Button>
                         </a>
-                        <a href={challenge.paymentLinks.paypal} target="_blank" rel="noopener noreferrer">
+                        <a href={`/challenges/${challenge.id}/pay?method=paypal`} target="_blank" rel="noopener noreferrer">
                           <Button className="w-full bg-gradient-to-r from-[#0070BA] to-[#005EA6]">
                             <Wallet className="w-4 h-4 mr-2" />
                             Pay with PayPal
                           </Button>
                         </a>
-                        <a href={challenge.paymentLinks.crypto} target="_blank" rel="noopener noreferrer">
+                        <a href={`/challenges/${challenge.id}/pay?method=crypto`} target="_blank" rel="noopener noreferrer">
                           <Button className="w-full bg-gradient-to-r from-[#0052FF] to-[#0040CC]">
                             <Bitcoin className="w-4 h-4 mr-2" />
                             Pay with Crypto
