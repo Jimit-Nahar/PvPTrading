@@ -14,8 +14,7 @@ import ChallengeCard from "@/components/challenge-card";
 import ActiveChallengeCard from "@/components/active-challenge-card";
 import PerformanceChart from "@/components/performance-chart";
 import StrategyRandomizer from "@/components/strategy-randomizer";
-import MilestoneDashboard from "@/components/milestone-dashboard";
-import { TrendingUp, Target, Award, Zap, Trophy, CreditCard, Wallet, Bitcoin } from "lucide-react";
+import { Trophy, CreditCard, Wallet, Bitcoin } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -83,47 +82,6 @@ export default function Dashboard() {
     (challenge) => challenge.status === "upcoming"
   ) || [];
 
-  // Sample milestone data
-  const milestones = [
-    {
-      id: "1",
-      title: "First Profit",
-      description: "Make your first profitable trade",
-      current: 150,
-      target: 100,
-      unit: "$",
-      icon: <TrendingUp className="h-4 w-4" />,
-    },
-    {
-      id: "2",
-      title: "Winning Streak",
-      description: "Achieve 5 profitable trades in a row",
-      current: 3,
-      target: 5,
-      unit: "trades",
-      icon: <Zap className="h-4 w-4" />,
-    },
-    {
-      id: "3",
-      title: "Capital Growth",
-      description: "Grow your account to $15,000",
-      current: 10230.45,
-      target: 15000,
-      unit: "$",
-      icon: <Target className="h-4 w-4" />,
-      isNew: true, // This will trigger confetti
-    },
-    {
-      id: "4",
-      title: "Complete Challenge",
-      description: "Successfully pass a funded challenge",
-      current: 0,
-      target: 1,
-      unit: "challenges",
-      icon: <Trophy className="h-4 w-4" />,
-    },
-  ];
-
   return (
     <MainLayout>
       {/* Stats Overview */}
@@ -162,11 +120,6 @@ export default function Dashboard() {
 
           <StrategyRandomizer />
         </div>
-      </div>
-
-      {/* Milestones Dashboard */}
-      <div className="px-6 mb-6">
-        <MilestoneDashboard achievements={milestones} />
       </div>
 
       {/* Challenges Section */}
