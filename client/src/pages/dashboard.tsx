@@ -82,7 +82,7 @@ export default function Dashboard() {
   const upcomingChallenges = challenges?.filter(
     (challenge) => challenge.status === "upcoming"
   ) || [];
-  
+
   // Sample milestone data
   const milestones = [
     {
@@ -159,7 +159,7 @@ export default function Dashboard() {
             <h3 className="font-semibold mb-5">Recent Activity</h3>
             <ActivityList activities={activities || []} />
           </div>
-          
+
           <StrategyRandomizer />
         </div>
       </div>
@@ -216,14 +216,72 @@ export default function Dashboard() {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {upcomingChallenges.slice(0, 3).map((challenge) => (
-                  <ChallengeCard
-                    key={challenge.id}
-                    challenge={challenge}
-                    participantsCount={12}
-                  />
-                ))}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* 10K Challenge */}
+                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                  <h3 className="text-2xl font-bold mb-4">$10K Challenge</h3>
+                  <div className="space-y-4">
+                    <a href="https://buy.stripe.com/eVa9Ca1IFeYLaYgaEN" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
+                        Pay with Credit Card
+                      </Button>
+                    </a>
+                    <a href="https://www.paypal.com/ncp/payment/9UBJPT32WV9ZU" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
+                        Pay with PayPal
+                      </Button>
+                    </a>
+                    <a href="https://commerce.coinbase.com/checkout/2c04ee65-65af-4c08-96a2-9e6fba6517e9" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
+                        Pay with Crypto
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+
+                {/* 25K Challenge */}
+                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                  <h3 className="text-2xl font-bold mb-4">$25K Challenge</h3>
+                  <div className="space-y-4">
+                    <a href="https://buy.stripe.com/6oEdSq0EB7wjgiA7sC" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
+                        Pay with Credit Card
+                      </Button>
+                    </a>
+                    <a href="https://www.paypal.com/ncp/payment/QF396HX2XEBJL" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
+                        Pay with PayPal
+                      </Button>
+                    </a>
+                    <a href="https://commerce.coinbase.com/checkout/28b36ebf-6d2f-4a24-8705-ed7356098ab0" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
+                        Pay with Crypto
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+
+                {/* 50K Challenge */}
+                <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                  <h3 className="text-2xl font-bold mb-4">$50K Challenge</h3>
+                  <div className="space-y-4">
+                    <a href="https://buy.stripe.com/4gw5lUbjf03R3vO6oz" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
+                        Pay with Credit Card
+                      </Button>
+                    </a>
+                    <a href="https://www.paypal.com/ncp/payment/TC4UTAGGFCKH8" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
+                        Pay with PayPal
+                      </Button>
+                    </a>
+                    <a href="https://commerce.coinbase.com/checkout/50ce0148-0b93-4253-a526-bd0cdbb64d47" target="_blank" rel="noopener noreferrer">
+                      <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
+                        Pay with Crypto
+                      </Button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>
