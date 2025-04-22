@@ -317,33 +317,12 @@ export default function ChallengesPage() {
                       </div>
 
                       <div className="space-y-3">
-                        <a
-                          href={challenge.payments.card}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Button 
+                          className="w-full"
+                          onClick={() => handleViewChallenge(challenge.id)}
                         >
-                          <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
-                            Pay with Credit Card
-                          </Button>
-                        </a>
-                        <a
-                          href={challenge.payments.paypal}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
-                            Pay with PayPal
-                          </Button>
-                        </a>
-                        <a
-                          href={challenge.payments.crypto}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
-                            Pay with Crypto
-                          </Button>
-                        </a>
+                          Join Challenge
+                        </Button>
                       </div>
                     </div>
                   </div>
