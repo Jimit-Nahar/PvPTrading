@@ -164,6 +164,11 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Milestones Dashboard */}
+      <div className="px-6 mb-6">
+        <MilestoneDashboard achievements={milestones} />
+      </div>
+
       {/* Tabs for Challenges */}
       <div className="px-6 mb-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
