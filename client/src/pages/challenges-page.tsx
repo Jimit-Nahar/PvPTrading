@@ -61,44 +61,7 @@ export default function ChallengesPage() {
     });
   }
 
-  const challengesList = [
-    {
-      id: "10k",
-      name: "$10K Challenge",
-      type: "forex",
-      status: "upcoming",
-      description: "Start your trading journey with a $10,000 funded account",
-      prizeAmount: "10000",
-      entryFee: "97",
-      maxParticipants: 100,
-      startTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-      endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // 10 days from now
-    },
-    {
-      id: "25k",
-      name: "$25K Challenge",
-      type: "forex",
-      status: "upcoming",
-      description: "Scale up with a $25,000 funded account",
-      prizeAmount: "25000",
-      entryFee: "197",
-      maxParticipants: 100,
-      startTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-    },
-    {
-      id: "50k",
-      name: "$50K Challenge",
-      type: "forex",
-      status: "upcoming",
-      description: "Trade with a professional $50,000 funded account",
-      prizeAmount: "50000",
-      entryFee: "297",
-      maxParticipants: 100,
-      startTime: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-    },
-  ];
+  const challengesList = [];
 
   const filterChallenges = (status: string) => {
     let filtered = [...challenges];
