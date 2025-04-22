@@ -156,7 +156,7 @@ export default function ChallengesPage() {
     }
   };
 
-  const handleViewChallenge = (id: number) => {
+  const handleViewChallenge = (id: string) => {
     navigate(`/challenges/${id}`);
   };
 
