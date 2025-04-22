@@ -4,23 +4,23 @@ import MainLayout from "@/layouts/main-layout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Search, 
-  Filter, 
-  Calendar, 
-  Wallet, 
-  Trophy, 
-  Users, 
-  Clock, 
-  ArrowRight 
+import {
+  Search,
+  Filter,
+  Calendar,
+  Wallet,
+  Trophy,
+  Users,
+  Clock,
+  ArrowRight,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { Challenge } from "@shared/schema";
@@ -61,7 +61,7 @@ export default function ChallengesPage() {
     });
   }
 
-  const challenges = [
+  const challengesList = [
     {
       id: "10k",
       name: "$10K Challenge",
@@ -74,8 +74,9 @@ export default function ChallengesPage() {
       payments: {
         card: "https://buy.stripe.com/eVa9Ca1IFeYLaYgaEN",
         paypal: "https://www.paypal.com/ncp/payment/9UBJPT32WV9ZU",
-        crypto: "https://commerce.coinbase.com/checkout/2c04ee65-65af-4c08-96a2-9e6fba6517e9"
-      }
+        crypto:
+          "https://commerce.coinbase.com/checkout/2c04ee65-65af-4c08-96a2-9e6fba6517e9",
+      },
     },
     {
       id: "25k",
@@ -89,8 +90,9 @@ export default function ChallengesPage() {
       payments: {
         card: "https://buy.stripe.com/6oEdSq0EB7wjgiA7sC",
         paypal: "https://www.paypal.com/ncp/payment/QF396HX2XEBJL",
-        crypto: "https://commerce.coinbase.com/checkout/28b36ebf-6d2f-4a24-8705-ed7356098ab0"
-      }
+        crypto:
+          "https://commerce.coinbase.com/checkout/28b36ebf-6d2f-4a24-8705-ed7356098ab0",
+      },
     },
     {
       id: "50k",
@@ -104,33 +106,35 @@ export default function ChallengesPage() {
       payments: {
         card: "https://buy.stripe.com/4gw5lUbjf03R3vO6oz",
         paypal: "https://www.paypal.com/ncp/payment/TC4UTAGGFCKH8",
-        crypto: "https://commerce.coinbase.com/checkout/50ce0148-0b93-4253-a526-bd0cdbb64d47"
-      }
-    }
+        crypto:
+          "https://commerce.coinbase.com/checkout/50ce0148-0b93-4253-a526-bd0cdbb64d47",
+      },
+    },
   ];
 
   const filterChallenges = (status: string) => {
     let filtered = [...challenges];
-    
+
     // Filter by status
     if (status !== "all") {
-      filtered = filtered.filter(c => c.status === status);
+      filtered = filtered.filter((c) => c.status === status);
     }
-    
+
     // Filter by type
     if (filterType !== "all") {
-      filtered = filtered.filter(c => c.type === filterType);
+      filtered = filtered.filter((c) => c.type === filterType);
     }
-    
+
     // Filter by search query
     if (searchQuery.trim() !== "") {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(c => 
-        c.name.toLowerCase().includes(query) || 
-        (c.description && c.description.toLowerCase().includes(query))
+      filtered = filtered.filter(
+        (c) =>
+          c.name.toLowerCase().includes(query) ||
+          (c.description && c.description.toLowerCase().includes(query)),
       );
     }
-    
+
     return filtered;
   };
 
@@ -166,12 +170,12 @@ export default function ChallengesPage() {
               Browse and join trading challenges to compete with other traders
             </p>
           </div>
-          
+
           <div className="mt-4 md:mt-0">
             <Button>Create Challenge</Button>
           </div>
         </div>
-        
+
         {/* Search and Filters */}
         <div className="bg-card rounded-xl p-5 shadow-lg mb-8">
           <div className="flex flex-col md:flex-row gap-4">
@@ -184,7 +188,7 @@ export default function ChallengesPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            
+
             <div className="w-full md:w-48">
               <Select value={filterType} onValueChange={setFilterType}>
                 <SelectTrigger>
@@ -203,7 +207,7 @@ export default function ChallengesPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Challenge Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-card/60 backdrop-blur-sm rounded-xl p-5 shadow-lg">
@@ -212,12 +216,14 @@ export default function ChallengesPage() {
                 <Calendar className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <p className="text-muted-foreground text-sm">Total Challenges</p>
+                <p className="text-muted-foreground text-sm">
+                  Total Challenges
+                </p>
                 <p className="text-2xl font-bold">{challenges?.length || 0}</p>
               </div>
             </div>
           </div>
-          
+
           <div className="bg-card/60 backdrop-blur-sm rounded-xl p-5 shadow-lg">
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mr-4">
@@ -225,11 +231,13 @@ export default function ChallengesPage() {
               </div>
               <div>
                 <p className="text-muted-foreground text-sm">Upcoming</p>
-                <p className="text-2xl font-bold">{upcomingChallenges.length}</p>
+                <p className="text-2xl font-bold">
+                  {upcomingChallenges.length}
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div className="bg-card/60 backdrop-blur-sm rounded-xl p-5 shadow-lg">
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center mr-4">
@@ -241,7 +249,7 @@ export default function ChallengesPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-card/60 backdrop-blur-sm rounded-xl p-5 shadow-lg">
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mr-4">
@@ -254,7 +262,7 @@ export default function ChallengesPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Tabs and Challenge Cards */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-8">
@@ -263,48 +271,75 @@ export default function ChallengesPage() {
             <TabsTrigger value="active">Active</TabsTrigger>
             <TabsTrigger value="completed">Completed</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="all">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allChallenges.length > 0 ? (
                 allChallenges.map((challenge) => (
-                  <div key={challenge.id} className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
-                    <div className={`h-2 ${challenge.type === 'forex' ? 'bg-blue-500' : challenge.type === 'crypto' ? 'bg-green-500' : 'bg-purple-500'}`}></div>
+                  <div
+                    key={challenge.id}
+                    className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
+                  >
+                    <div
+                      className={`h-2 ${challenge.type === "forex" ? "bg-blue-500" : challenge.type === "crypto" ? "bg-green-500" : "bg-purple-500"}`}
+                    ></div>
                     <div className="p-6">
                       <div className="flex justify-between items-center mb-6">
                         <Badge className={getBadgeColor(challenge.type)}>
-                          {challenge.type.charAt(0).toUpperCase() + challenge.type.slice(1)}
+                          {challenge.type.charAt(0).toUpperCase() +
+                            challenge.type.slice(1)}
                         </Badge>
                         <Badge variant="outline">Ready to Join</Badge>
                       </div>
-                      <h3 className="text-xl font-bold mb-4">{challenge.name}</h3>
+                      <h3 className="text-xl font-bold mb-4">
+                        {challenge.name}
+                      </h3>
                       <p className="text-muted-foreground text-sm mb-6">
                         {challenge.description}
                       </p>
-                      
+
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div>
                           <p className="text-xs text-muted-foreground">Prize</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.prizeAmount))} Account</p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.prizeAmount))}{" "}
+                            Account
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Entry Fee</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.entryFee))}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Entry Fee
+                          </p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.entryFee))}
+                          </p>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-3">
-                        <a href={challenge.payments.card} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={challenge.payments.card}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Button className="w-full bg-[#635BFF] hover:bg-[#635BFF]/90">
                             Pay with Credit Card
                           </Button>
                         </a>
-                        <a href={challenge.payments.paypal} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={challenge.payments.paypal}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Button className="w-full bg-[#0070BA] hover:bg-[#0070BA]/90">
                             Pay with PayPal
                           </Button>
                         </a>
-                        <a href={challenge.payments.crypto} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={challenge.payments.crypto}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Button className="w-full bg-[#0052FF] hover:bg-[#0052FF]/90">
                             Pay with Crypto
                           </Button>
@@ -315,50 +350,75 @@ export default function ChallengesPage() {
                 ))
               ) : (
                 <div className="col-span-3 text-center py-10">
-                  <p className="text-muted-foreground">No challenges found matching your criteria.</p>
+                  <p className="text-muted-foreground">
+                    No challenges found matching your criteria.
+                  </p>
                 </div>
               )}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="upcoming">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {upcomingChallenges.length > 0 ? (
                 upcomingChallenges.map((challenge) => (
-                  <div key={challenge.id} className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
-                    <div className={`h-2 ${challenge.type === 'forex' ? 'bg-blue-500' : challenge.type === 'crypto' ? 'bg-green-500' : 'bg-purple-500'}`}></div>
+                  <div
+                    key={challenge.id}
+                    className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
+                  >
+                    <div
+                      className={`h-2 ${challenge.type === "forex" ? "bg-blue-500" : challenge.type === "crypto" ? "bg-green-500" : "bg-purple-500"}`}
+                    ></div>
                     <div className="p-6">
                       <div className="flex justify-between items-center mb-6">
                         <Badge className={getBadgeColor(challenge.type)}>
-                          {challenge.type.charAt(0).toUpperCase() + challenge.type.slice(1)}
+                          {challenge.type.charAt(0).toUpperCase() +
+                            challenge.type.slice(1)}
                         </Badge>
-                        <div className="text-xs text-muted-foreground">Starts in 2 days</div>
+                        <div className="text-xs text-muted-foreground">
+                          Starts in 2 days
+                        </div>
                       </div>
-                      <h3 className="text-xl font-bold mb-4">{challenge.name}</h3>
+                      <h3 className="text-xl font-bold mb-4">
+                        {challenge.name}
+                      </h3>
                       <p className="text-muted-foreground text-sm mb-6">
                         {challenge.description}
                       </p>
-                      
+
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div>
                           <p className="text-xs text-muted-foreground">Prize</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.prizeAmount))} Account</p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.prizeAmount))}{" "}
+                            Account
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Entry Fee</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.entryFee))}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Entry Fee
+                          </p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.entryFee))}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Participants
+                          </p>
+                          <p className="font-semibold">
+                            {0} / {challenge.maxParticipants}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Duration</p>
+                          <p className="text-xs text-muted-foreground">
+                            Duration
+                          </p>
                           <p className="font-semibold">3 Days</p>
                         </div>
                       </div>
-                      
-                      <Button 
+
+                      <Button
                         className="w-full flex items-center justify-center"
                         onClick={() => handleViewChallenge(challenge.id)}
                       >
@@ -370,50 +430,78 @@ export default function ChallengesPage() {
                 ))
               ) : (
                 <div className="col-span-3 text-center py-10">
-                  <p className="text-muted-foreground">No upcoming challenges found.</p>
+                  <p className="text-muted-foreground">
+                    No upcoming challenges found.
+                  </p>
                 </div>
               )}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="active">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {activeChallenges.length > 0 ? (
                 activeChallenges.map((challenge) => (
-                  <div key={challenge.id} className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
-                    <div className={`h-2 ${challenge.type === 'forex' ? 'bg-blue-500' : challenge.type === 'crypto' ? 'bg-green-500' : 'bg-purple-500'}`}></div>
+                  <div
+                    key={challenge.id}
+                    className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
+                  >
+                    <div
+                      className={`h-2 ${challenge.type === "forex" ? "bg-blue-500" : challenge.type === "crypto" ? "bg-green-500" : "bg-purple-500"}`}
+                    ></div>
                     <div className="p-6">
                       <div className="flex justify-between items-center mb-6">
                         <Badge className={getBadgeColor(challenge.type)}>
-                          {challenge.type.charAt(0).toUpperCase() + challenge.type.slice(1)}
+                          {challenge.type.charAt(0).toUpperCase() +
+                            challenge.type.slice(1)}
                         </Badge>
-                        <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20">Live Now</Badge>
+                        <Badge
+                          variant="outline"
+                          className="bg-green-500/10 text-green-500 border-green-500/20"
+                        >
+                          Live Now
+                        </Badge>
                       </div>
-                      <h3 className="text-xl font-bold mb-4">{challenge.name}</h3>
+                      <h3 className="text-xl font-bold mb-4">
+                        {challenge.name}
+                      </h3>
                       <p className="text-muted-foreground text-sm mb-6">
                         {challenge.description}
                       </p>
-                      
+
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div>
                           <p className="text-xs text-muted-foreground">Prize</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.prizeAmount))} Account</p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.prizeAmount))}{" "}
+                            Account
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Entry Fee</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.entryFee))}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Entry Fee
+                          </p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.entryFee))}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Participants
+                          </p>
+                          <p className="font-semibold">
+                            {0} / {challenge.maxParticipants}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Ends In</p>
+                          <p className="text-xs text-muted-foreground">
+                            Ends In
+                          </p>
                           <p className="font-semibold">1 day 12:32:10</p>
                         </div>
                       </div>
-                      
-                      <Button 
+
+                      <Button
                         className="w-full flex items-center justify-center"
                         onClick={() => handleViewChallenge(challenge.id)}
                       >
@@ -425,50 +513,78 @@ export default function ChallengesPage() {
                 ))
               ) : (
                 <div className="col-span-3 text-center py-10">
-                  <p className="text-muted-foreground">No active challenges found.</p>
+                  <p className="text-muted-foreground">
+                    No active challenges found.
+                  </p>
                 </div>
               )}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="completed">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {completedChallenges.length > 0 ? (
                 completedChallenges.map((challenge) => (
-                  <div key={challenge.id} className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
-                    <div className={`h-2 ${challenge.type === 'forex' ? 'bg-blue-500' : challenge.type === 'crypto' ? 'bg-green-500' : 'bg-purple-500'}`}></div>
+                  <div
+                    key={challenge.id}
+                    className="bg-card rounded-xl shadow-lg overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl"
+                  >
+                    <div
+                      className={`h-2 ${challenge.type === "forex" ? "bg-blue-500" : challenge.type === "crypto" ? "bg-green-500" : "bg-purple-500"}`}
+                    ></div>
                     <div className="p-6">
                       <div className="flex justify-between items-center mb-6">
                         <Badge className={getBadgeColor(challenge.type)}>
-                          {challenge.type.charAt(0).toUpperCase() + challenge.type.slice(1)}
+                          {challenge.type.charAt(0).toUpperCase() +
+                            challenge.type.slice(1)}
                         </Badge>
-                        <Badge variant="outline" className="bg-secondary text-muted-foreground">Completed</Badge>
+                        <Badge
+                          variant="outline"
+                          className="bg-secondary text-muted-foreground"
+                        >
+                          Completed
+                        </Badge>
                       </div>
-                      <h3 className="text-xl font-bold mb-4">{challenge.name}</h3>
+                      <h3 className="text-xl font-bold mb-4">
+                        {challenge.name}
+                      </h3>
                       <p className="text-muted-foreground text-sm mb-6">
                         {challenge.description}
                       </p>
-                      
+
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div>
                           <p className="text-xs text-muted-foreground">Prize</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.prizeAmount))} Account</p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.prizeAmount))}{" "}
+                            Account
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Entry Fee</p>
-                          <p className="font-semibold">{formatCurrency(parseFloat(challenge.entryFee))}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Entry Fee
+                          </p>
+                          <p className="font-semibold">
+                            {formatCurrency(parseFloat(challenge.entryFee))}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Participants</p>
-                          <p className="font-semibold">{0} / {challenge.maxParticipants}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Participants
+                          </p>
+                          <p className="font-semibold">
+                            {0} / {challenge.maxParticipants}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-muted-foreground">Winner</p>
+                          <p className="text-xs text-muted-foreground">
+                            Winner
+                          </p>
                           <p className="font-semibold">Alex T.</p>
                         </div>
                       </div>
-                      
-                      <Button 
+
+                      <Button
                         className="w-full flex items-center justify-center"
                         variant="secondary"
                         onClick={() => handleViewChallenge(challenge.id)}
@@ -481,7 +597,9 @@ export default function ChallengesPage() {
                 ))
               ) : (
                 <div className="col-span-3 text-center py-10">
-                  <p className="text-muted-foreground">No completed challenges found.</p>
+                  <p className="text-muted-foreground">
+                    No completed challenges found.
+                  </p>
                 </div>
               )}
             </div>
